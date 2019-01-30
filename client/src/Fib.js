@@ -15,7 +15,9 @@ class Fib extends Component {
 
   async fetchValues(){
     const values = await axios.get('/api/values/current');
-    this.setState({ values: values.data });
+    this.setState({
+      values: values.data
+    });
   }
 
   async fetchIndexes(){
@@ -44,11 +46,11 @@ class Fib extends Component {
     for(let key in this.state.values){
       entries.push(
         <div key={key}>
-          For index {key} I calculated this.state.values[{key}]
+          For index {key} I calculated {this.state.values[key]}
         </div>
       )
     }
-    return
+    return entries;
   }
 
   render() {
