@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t stephanieh/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t sharris/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run stephanieh/react-test npm test -- --coverage
+  - docker run sharris/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t stephanieh/multi-client ./client
-  - docker build -t stephanieh/multi-nginx ./nginx
-  - docker build -t stephanieh/multi-server ./server
-  - docker build -t stephanieh/multi-worker ./worker
+  - docker build -t sharris/multi-client ./client
+  - docker build -t sharris/multi-nginx ./nginx
+  - docker build -t sharris/multi-server ./server
+  - docker build -t sharris/multi-worker ./worker
 
-  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push stephanieh/multi-client
-  - docker push stephanieh/multi-nginx
-  - docker push stephanieh/multi-server
-  - docker push stephanieh/multi-worker
+  - docker push sharris/multi-client
+  - docker push sharris/multi-nginx
+  - docker push sharris/multi-server
+  - docker push sharris/multi-worker
